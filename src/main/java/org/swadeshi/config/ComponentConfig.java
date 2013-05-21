@@ -16,6 +16,9 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.swadeshi.converters.UserReader;
 import org.swadeshi.converters.UserWriter;
 
@@ -50,7 +53,7 @@ public class ComponentConfig {
 		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), converter);*/
 		return mongoTemplate;
 	}
-	
+
 	@Bean
 	public MappingMongoConverter mappingMongoConverter() throws Exception {
 		MappingMongoConverter mappingMongoConverter = new MappingMongoConverter(mongoDbFactory(), new MongoMappingContext());

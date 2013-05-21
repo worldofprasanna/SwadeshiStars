@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@Import(ComponentConfig.class)
+@Import(value = {ComponentConfig.class, DataConfig.class, ExplicitSocialConfig.class})
 @PropertySource("classpath:config.properties")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
