@@ -1,16 +1,20 @@
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Carousel Template · Bootstrap</title>
+    <title>Swadesi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="Carousel%20Template%20%C2%B7%20Bootstrap_files/bootstrap.css" rel="stylesheet">
-    <link href="Carousel%20Template%20%C2%B7%20Bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap-responsive.css"  />
     <style>
+    
 
     /* GLOBAL STYLES
     -------------------------------------------------- */
@@ -284,7 +288,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Project name</a>
+            <a class="brand" href="#">Project name  <%=request.getContextPath()%> </a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -404,7 +408,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
       <hr class="featurette-divider">
 
       <div class="featurette">
-        <img class="featurette-image pull-right" src="Carousel%20Template%20%C2%B7%20Bootstrap_files/browser-icon-chrome.png">
+        <img class="featurette-image pull-right" src="themes/images/browser-icon-chrome.png">
         <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor 
 fringilla. Vestibulum id ligula porta felis euismod semper. Praesent 
