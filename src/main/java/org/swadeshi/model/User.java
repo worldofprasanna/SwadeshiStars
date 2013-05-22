@@ -7,10 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "User")
 public class User {
 	
-	@Id
-	private String id;
 	
 	private String userName;
+	
+	private String lastName;
+	
+	private String firstName;
 	
 	private String emailId;
 
@@ -30,12 +32,20 @@ public class User {
 		this.emailId = emailId;
 	}
 
-	public String getId() {
-		return id;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 

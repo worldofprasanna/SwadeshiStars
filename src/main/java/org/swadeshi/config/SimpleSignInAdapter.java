@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -38,7 +41,8 @@ public class SimpleSignInAdapter implements SignInAdapter {
 	
 	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
 		SignInUtils.signin(localUserId);
-		return extractOriginalUrl(request);
+		loginAsUserWithPrivileges(connection.fetchUserProfile().getUsername(),"");
+		return "/home";
 	}
 
 	private String extractOriginalUrl(NativeWebRequest request) {
@@ -59,5 +63,15 @@ public class SimpleSignInAdapter implements SignInAdapter {
 		}
 		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 	}
+	
+	protected void loginAsUserWithPrivileges(String username, String password) {
+
+		if (username == null) username = "Admin";
+		if (password == null) password = "Admin";
+		
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, "");
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
+
 
 }

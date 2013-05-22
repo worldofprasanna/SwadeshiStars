@@ -17,6 +17,7 @@ package org.swadeshi.config;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ import org.springframework.social.UserIdSource;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
@@ -59,6 +61,9 @@ public class ExplicitSocialConfig {
 
 	@Value("${google.clientSecret}")
 	private String clientSecret;
+	
+	@Autowired
+	private ConnectionSignUp connectionSignUp;
 	
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
@@ -99,7 +104,9 @@ public class ExplicitSocialConfig {
 	@Bean
 	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public UsersConnectionRepository usersConnectionRepository() {
-		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		JdbcUsersConnectionRepository jdbcUsersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator(), Encryptors.noOpText());
+		jdbcUsersConnectionRepository.setConnectionSignUp(connectionSignUp);
+		return jdbcUsersConnectionRepository;
 	}
 
 	@Bean
@@ -129,7 +136,10 @@ public class ExplicitSocialConfig {
 	@Bean
 	public ProviderSignInController providerSignInController() {
 		 RequestCache requestCache = new HttpSessionRequestCache();  
-		return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache));
+		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache));
+		providerSignInController.setApplicationUrl("http://localhost:8090/swadeshistars");
+		
+		return providerSignInController;
 	}
 	
 	

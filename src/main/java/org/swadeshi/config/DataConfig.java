@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -85,7 +86,47 @@ public class DataConfig {
         map.put(org.hibernate.cfg.Environment.C3P0_TIMEOUT, "5");
         map.put(org.hibernate.cfg.Environment.C3P0_MIN_SIZE, "360000");
         map.put(org.hibernate.cfg.Environment.DIALECT,  "org.hibernate.dialect.MySQL5Dialect");
+        map.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
+       // map.put(org.hibernate.cfg.Environment.HBM2DDL_IMPORT_FILES, "Account.sql");
         return map;
     }
     
+    @Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
+    
+	/*
+	@Bean(destroyMethod = "shutdown")
+	public DataSource dataSource() {
+		EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
+		factory.setDatabaseName("spring-social-showcase");
+		factory.setDatabaseType(EmbeddedDatabaseType.H2);
+		factory.setDatabasePopulator(databasePopulator());
+		return factory.getDatabase();
+	}
+	
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(dataSource());
+	}
+	
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
+
+	@Bean
+	public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	// internal helpers
+
+	private DatabasePopulator databasePopulator() {
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
+		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
+		return populator;
+	}*/
 }

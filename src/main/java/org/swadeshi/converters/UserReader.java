@@ -9,7 +9,6 @@ public class UserReader implements Converter<DBObject, User>{
 
 	public User convert(DBObject source) {
 		User user = new User();
-		user.setId((String)source.get("_id"));
 		user.setEmailId((String) source.get("email"));
 		user.setUserName((String) source.get("name"));
 		return user;
