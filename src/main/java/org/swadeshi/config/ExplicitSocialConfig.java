@@ -107,8 +107,7 @@ public class ExplicitSocialConfig {
 
 	
 	@Bean
-	public ProviderSignInController providerSignInController() {
-		 RequestCache requestCache = new HttpSessionRequestCache();  
+	public ProviderSignInController providerSignInController() {		 
 		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
 		providerSignInController.setApplicationUrl("http://localhost:8090/swadeshistars");
 		

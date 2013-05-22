@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
-import org.swadeshi.model.User;
+import org.swadeshi.user.User;
 
 public class SimpleConnectionSignUp implements ConnectionSignUp {
 

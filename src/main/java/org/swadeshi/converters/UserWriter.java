@@ -1,7 +1,7 @@
 package org.swadeshi.converters;
 
 import org.springframework.core.convert.converter.Converter;
-import org.swadeshi.model.User;
+import org.swadeshi.user.User;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
