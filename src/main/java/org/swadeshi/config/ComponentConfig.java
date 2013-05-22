@@ -28,46 +28,9 @@ import com.mongodb.Mongo;
 @Configuration
 public class ComponentConfig {
 
-	@Autowired private Environment environment;
-
-	@Value("${mongodb.host.name}")
-	private String hostName;
-
-	@Value("${mongodb.port.no}")
-	private Integer portNo;
-
-	@Value("${mongodb.database.name}")
-	private String databaseName;
-
 	@Bean
-	public MongoDbFactory mongoDbFactory() throws Exception {
-		return new SimpleMongoDbFactory(new Mongo(hostName,	portNo), databaseName);
+	public SimpleConnectionSignUp simpleConnectionSignUp(){
+		return new SimpleConnectionSignUp();
 	}
-
-	@Bean
-	public MongoTemplate mongoTemplate() throws Exception {
-		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), mappingMongoConverter());
-		/*MappingMongoConverter converter = new MappingMongoConverter(mongoDbFactory(), new MongoMappingContext());
-		converter.setTypeMapper(new DefaultMongoTypeMapper(null));
-
-		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory(), converter);*/
-		return mongoTemplate;
-	}
-
-	@Bean
-	public MappingMongoConverter mappingMongoConverter() throws Exception {
-		MappingMongoConverter mappingMongoConverter = new MappingMongoConverter(mongoDbFactory(), new MongoMappingContext());
-		List<Converter> convList = new ArrayList<Converter>();
-		convList.add(new UserReader());
-		convList.add(new UserWriter());
-		CustomConversions conversions = new CustomConversions(convList);
-		mappingMongoConverter.setCustomConversions(conversions);
-		return mappingMongoConverter;
-	}
-
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
-
+	
 }

@@ -15,16 +15,7 @@
 
 	<!--<context:component-scan base-package="com.springsource.html5expense" /> -->
 
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/*"/>
-			<beans:ref bean="userInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	
 	<mvc:view-controller path="/signin"/>
 	<mvc:view-controller path="/signout"/>
-
-
 
 </beans:beans>

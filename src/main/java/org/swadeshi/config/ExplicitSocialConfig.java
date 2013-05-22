@@ -73,20 +73,6 @@ public class ExplicitSocialConfig {
 	}
 	
 
-	/*@Bean
-	public DisconnectController disconnectController() {
-		return new DisconnectController(usersConnectionRepository(), clientSecret);
-	}*/
-	
-	/*@Bean
-	public ConnectionFactoryLocator connectionFactoryLocator() {
-		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new GoogleConnectionFactory(clientId, clientSecret));
-		return registry;
-	}*/
-	
-	
-	
 	@Inject
 	private Environment environment;
 
@@ -120,40 +106,13 @@ public class ExplicitSocialConfig {
 	}
 
 	
-
-	@Bean
-	public ConnectController connectController() {
-		ConnectController connectController = new ConnectController(connectionFactoryLocator(), connectionRepository());
-		return connectController;
-	}
-	
-	/*@Bean
-	public ProviderSignInController providerSignInController() {
-	    RequestCache requestCache = new HttpSessionRequestCache();  
-	    return new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache, userService));
-	}*/
-
 	@Bean
 	public ProviderSignInController providerSignInController() {
 		 RequestCache requestCache = new HttpSessionRequestCache();  
-		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter(requestCache));
+		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
 		providerSignInController.setApplicationUrl("http://localhost:8090/swadeshistars");
 		
 		return providerSignInController;
 	}
 	
-	
-	@Bean
-	public UserIdSource userIdSource() {
-		return new UserIdSource() {			
-			public String getUserId() {
-				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-				if (authentication == null) {
-					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
-				}
-				return authentication.getName();
-			}
-		};
-	}
-
 }
