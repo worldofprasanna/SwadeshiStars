@@ -6,25 +6,18 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Swadesi</title>
-    
-    <!-- Le styles -->
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap.css" />
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap-responsive.css"  />
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap-customized.css"  />
+        
 </head>
+
 <body>  
+<jsp:include page="header.jsp"></jsp:include>
 <div class="navbar-wrapper">
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
         <div class="navbar navbar-inverse">
           <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
-            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
             <a href="#" class="brand">Swadeshi Stars</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
@@ -39,7 +32,7 @@
 	<form action="signin/google" method="post">
 		<input type="hidden" name="scope" value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/drive" />
 		<input type="hidden" name="redirect_uri" value="/home" />
-		<button class="btn">Count Me In</button>
+		<button class="btn pull-right">Sign In</button>
 	</form>
 	<div class="container marketing">
 	<div class="featurette">

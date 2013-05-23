@@ -44,7 +44,7 @@ public class HomeController {
 	@RequestMapping("/signin")
 	public String home(Principal currentUser, Model model, HttpServletRequest request) {
 		String errorValue = request.getParameter("error");
-		return "signin";
+		return "index";
 	}
 	
 	
