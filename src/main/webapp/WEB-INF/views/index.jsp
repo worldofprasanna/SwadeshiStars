@@ -31,13 +31,17 @@
               <ul class="nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>                
+                <li><a href="#contact">Contact</a></li>                            
               </ul>
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
-
-<div class="container marketing">
+	<form action="signin/google" method="post">
+		<input type="hidden" name="scope" value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/drive" />
+		<input type="hidden" name="redirect_uri" value="/home" />
+		<button class="btn">Count Me In</button>
+	</form>
+	<div class="container marketing">
 	<div class="featurette">
         <img src="<%= request.getContextPath()%>/themes/images/browser-icon-chrome.png" class="featurette-image pull-right">
         <h2 class="featurette-heading">Everything is for a cause. <span class="muted">It'll blow your mind.</span></h2>
