@@ -33,17 +33,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 public class SimpleSignInAdapter implements SignInAdapter {
 
 	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
-		loginAsUserWithPrivileges(connection.fetchUserProfile().getUsername(),"");
+		signin(connection.fetchUserProfile().getUsername());
 		return "/home";
 	}
 
-	protected void loginAsUserWithPrivileges(String username, String password) {
-
-		if (username == null) username = "Admin";
-		if (password == null) password = "Admin";
-		
-		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, "");
-		SecurityContextHolder.getContext().setAuthentication(auth);
+	public void signin(String userId) {
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));	
 	}
 
 
