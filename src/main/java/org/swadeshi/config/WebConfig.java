@@ -13,13 +13,14 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.swadeshi.controllers.HomeController;
+import org.swadeshi.services.UserService;
 
 
 @Configuration
 @EnableWebMvc
 @Import(value = {ComponentConfig.class, DataConfig.class, ExplicitSocialConfig.class})
 @PropertySource("classpath:config.properties")
-@ComponentScan(basePackageClasses={HomeController.class})
+@ComponentScan(basePackageClasses={HomeController.class, UserService.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean

@@ -21,7 +21,8 @@ public class SimpleConnectionSignUp implements ConnectionSignUp {
 		user.setFirstName(profile.getFirstName());
 		user.setLastName(profile.getLastName());
 		user.setUserName(profile.getUsername());
-		mongoTemplate.save(user);		
+		user.setDisplayName(connection.getDisplayName());
+		mongoTemplate.save(user);	
 		return profile.getUsername();
 	}
 
