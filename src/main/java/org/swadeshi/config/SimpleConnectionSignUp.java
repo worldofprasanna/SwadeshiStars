@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UserProfile;
-import org.swadeshi.user.User;
+import org.swadeshi.entities.User;
 
 public class SimpleConnectionSignUp implements ConnectionSignUp {
 
@@ -21,7 +21,7 @@ public class SimpleConnectionSignUp implements ConnectionSignUp {
 		user.setFirstName(profile.getFirstName());
 		user.setLastName(profile.getLastName());
 		user.setUserName(profile.getUsername());
-		mongoTemplate.save(user);
+		mongoTemplate.save(user);		
 		return profile.getUsername();
 	}
 

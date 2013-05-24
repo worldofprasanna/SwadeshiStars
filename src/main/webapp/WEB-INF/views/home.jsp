@@ -15,7 +15,7 @@
 	<div class="navbar navbar-inverse">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
-            <a href="#" class="brand">Swadeshi Stars</a>
+            <a href="<%= request.getContextPath() %>" class="brand">Swadeshi Stars</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -26,7 +26,7 @@
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
-		<div class="alert alert-success">Welcome ${username}</div>
+        <div class="alert alert-success">Welcome ${username}</div>		
 			<div class="row">
 				<div class="span3 bs-docs-sidebar">
 					<ul class="nav nav-list bs-docs-sidenav affix">

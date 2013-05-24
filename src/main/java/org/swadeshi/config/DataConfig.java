@@ -44,6 +44,17 @@ import com.mongodb.Mongo;
 @PropertySource("classpath:config.properties")
 public class DataConfig {
 
+    @Autowired private Environment environment;
+
+	@Value("${mongodb.host.name}")
+	private String hostName;
+
+	@Value("${mongodb.port.no}")
+	private Integer portNo;
+
+	@Value("${mongodb.database.name}")
+	private String databaseName;
+
 	
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
@@ -113,51 +124,7 @@ public class DataConfig {
 		return new JdbcTemplate(dataSource());
 	}
     
-	/*
-	@Bean(destroyMethod = "shutdown")
-	public DataSource dataSource() {
-		EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
-		factory.setDatabaseName("spring-social-showcase");
-		factory.setDatabaseType(EmbeddedDatabaseType.H2);
-		factory.setDatabasePopulator(databasePopulator());
-		return factory.getDatabase();
-	}
-	
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
-	}
-	
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
-	}
-
-	@Bean
-	public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
-	
-	// internal helpers
-
-	private DatabasePopulator databasePopulator() {
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
-		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
-		return populator;
-	}*/
     
-    @Autowired private Environment environment;
-
-	@Value("${mongodb.host.name}")
-	private String hostName;
-
-	@Value("${mongodb.port.no}")
-	private Integer portNo;
-
-	@Value("${mongodb.database.name}")
-	private String databaseName;
-
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {
 		return new SimpleMongoDbFactory(new Mongo(hostName,	portNo), databaseName);
@@ -178,7 +145,7 @@ public class DataConfig {
 		MappingMongoConverter mappingMongoConverter = new MappingMongoConverter(mongoDbFactory(), new MongoMappingContext());
 		List<Converter> convList = new ArrayList<Converter>();
 		convList.add(new UserReader());
-		convList.add(new UserWriter());
+		//convList.add(new UserWriter());
 		CustomConversions conversions = new CustomConversions(convList);
 		mappingMongoConverter.setCustomConversions(conversions);
 		return mappingMongoConverter;

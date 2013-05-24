@@ -6,7 +6,10 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Swadesi</title>
-        
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/docs.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap-responsive.css"  />
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/themes/css/bootstrap-customized.css"  />
 </head>
 
 <body>  
@@ -18,11 +21,11 @@
         <div class="navbar navbar-inverse">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
-            <a href="#" class="brand">Swadeshi Stars</a>
+            <a href="" class="brand">Swadeshi Stars</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>                            
               </ul>
