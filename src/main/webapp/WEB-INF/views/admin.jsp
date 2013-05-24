@@ -7,22 +7,29 @@
 <title>Admin Page</title>
 </head>
 <body>
-	<div class="navbar navbar-inverse">
-          <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
-            <a href="" class="brand">Swadeshi Stars</a>
-            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li class="active"><a href="home">Home</a></li>
-                <li><a href="#about">Accounts</a></li>
-                <li><a href="#contact">Appreciation</a></li>                            
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div><!-- /.navbar-inner -->
-        </div><!-- /.navbar -->
-	<form name="">
-		<textarea name="" />
-	</form>
+    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+    	<li>Test</li>
+    	<li>Test</li>
+    </ul>
+	<form class="form-horizontal">
+    	<div class="control-group">
+    	<label class="control-label" for="inputEmail">Email</label>
+    	<div class="controls">
+    		<input type="text" id="inputEmail" placeholder="Email">
+    	</div>
+    	</div>
+    	<div data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dp3" class="input-append date">
+				<input type="text" readonly="" value="12-02-2012" size="16" class="span2">
+				<span class="add-on"><i class="icon-calendar"></i></span>
+		</div>
+    	<div class="control-group">
+    		<div class="controls">
+    			<label class="checkbox">
+    				<input type="checkbox"> Remember me
+    			</label>
+    		<button type="submit" class="btn">Sign in</button>
+    		</div>
+    	</div>
+    </form>
 </body>
 </html>
