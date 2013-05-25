@@ -47,7 +47,7 @@
 				<!-- Accounts -->
 				<div class="span10 hide actioncomponent" id="accountsform">
 				<legend>Upload Account Details</legend>
-				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
+				<form:form name="account" action="createaccount" modelAttribute="Account">		
 					<fieldset>						
 						<label>Appreciation Text</label>	
 						<textarea name="appreciationText" rows="5" class="span12"></textarea>

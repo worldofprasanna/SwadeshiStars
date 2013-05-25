@@ -27,7 +27,7 @@ public class AppreciationService {
 		return appreciation;
 	}
 	
-	public Appreciation saveAppreciationService(Appreciation appreciation) throws CustomException{
+	public Appreciation saveAppreciation(Appreciation appreciation) throws CustomException{
 		Appreciation appreciationSaved = appreciationDao.save(appreciation);
 		return appreciationSaved;
 	}

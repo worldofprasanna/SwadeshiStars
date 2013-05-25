@@ -16,9 +16,11 @@
 package org.swadeshi.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionSignUp;
@@ -26,16 +28,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.swadeshi.entities.Appreciation;
+import org.swadeshi.entities.User;
+import org.swadeshi.exceptions.CustomException;
+import org.swadeshi.services.AppreciationService;
+import org.swadeshi.services.UserService;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private AppreciationService appreciationService;
+
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/home")
 	public ModelAndView test(Principal currentUser){
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println("User : "+userName);
 		ModelAndView modelAndView =new ModelAndView("home");
+		
+		try {
+			List<Appreciation> appreciations = appreciationService.fetchAllAppreciations();
+			List<User> users = userService.fetchAllUsers();
+			
+			modelAndView.addObject("appreciations", appreciations);
+			modelAndView.addObject("users", users);
+			
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		modelAndView.addObject("username", userName);
 		return modelAndView;
 		
