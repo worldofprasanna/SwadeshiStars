@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,29 +8,74 @@
 <title>Admin Page</title>
 </head>
 <body>
-    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-    	<li>Test</li>
-    	<li>Test</li>
-    </ul>
-	<form class="form-horizontal">
-    	<div class="control-group">
-    	<label class="control-label" for="inputEmail">Email</label>
-    	<div class="controls">
-    		<input type="text" id="inputEmail" placeholder="Email">
-    	</div>
-    	</div>
-    	<div data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dp3" class="input-append date">
-				<input type="text" readonly="" value="12-02-2012" size="16" class="span2">
-				<span class="add-on"><i class="icon-calendar"></i></span>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2">
+				<!--Sidebar content-->
+				<div class="row">
+					<div class="span3 bs-docs-sidebar">
+						<ul class="nav nav-list bs-docs-sidenav affix">
+							<li class="active"><a href="#appreciation" id="appreciations"><i
+									class="icon-chevron-right"></i> Appreciations</a></li>
+							<li><a href="#account" id="accounts"><i class="icon-chevron-right"></i>
+									Accounts</a></li>
+							<li><a href="#activities" id="activities"><i class="icon-chevron-right"></i>
+									Activities</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="span10">
+			
+				<!--Body content-->
+				<p class="text-success">${message}</p>
+				<div class="span10 actioncomponent" id="appreciationform">
+				<legend>Create an Appreciation</legend>
+				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
+					<fieldset>						
+						<label>Appreciation Text</label>	
+						<textarea name="appreciationText" rows="5" class="span12"></textarea>
+						<label>Date</label>
+						<input type="date" placeholder="DD/MON/YYYY" name="createdDate">
+						<span class="help-block"></span>
+						<button type="submit" class="btn">Create</button>
+					</fieldset>
+				</form:form>
+				</div>
+				
+				
+				<!-- Accounts -->
+				<div class="span10 hide actioncomponent" id="accountsform">
+				<legend>Upload Account Details</legend>
+				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
+					<fieldset>						
+						<label>Appreciation Text</label>	
+						<textarea name="appreciationText" rows="5" class="span12"></textarea>
+						<label>Date</label>
+						<input type="text" placeholder="DD/MON/YYYY" name="createdDate">
+						<span class="help-block"></span>
+						<button type="submit" class="btn">Create</button>
+					</fieldset>
+				</form:form>
+				</div>
+				
+				
+				<!-- Accounts -->
+				<div class="span10 hide actioncomponent" id="activitiesform">
+				<legend>Create an Activity</legend>
+				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
+					<fieldset>						
+						<label>Appreciation Text</label>	
+						<textarea name="appreciationText" rows="5" class="span12"></textarea>
+						<label>Date</label>
+						<input type="text" placeholder="DD/MON/YYYY" name="createdDate">
+						<span class="help-block"></span>
+						<button type="submit" class="btn">Create</button>
+					</fieldset>
+				</form:form>
+				</div>
+			</div>
 		</div>
-    	<div class="control-group">
-    		<div class="controls">
-    			<label class="checkbox">
-    				<input type="checkbox"> Remember me
-    			</label>
-    		<button type="submit" class="btn">Sign in</button>
-    		</div>
-    	</div>
-    </form>
+	</div>
 </body>
 </html>

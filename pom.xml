@@ -162,6 +162,12 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>${org.springdatamongodb.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-data-commons-core</artifactId>
+					<groupId>org.springframework.data</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -230,7 +236,7 @@
 		<dependency>
 			 <groupId>org.springframework.data</groupId>
 			 <artifactId>spring-data-jpa</artifactId>
-			 <version>1.0.1.RELEASE</version>
+			 <version>1.3.2.RELEASE</version>
 		</dependency>
 		
 		<dependency>
@@ -261,11 +267,7 @@
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		 <dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>1.3.2.RELEASE</version>
-		</dependency>
+		 
 		
 		 <!-- Display tag -->
 		<dependency>

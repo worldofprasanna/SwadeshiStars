@@ -2,8 +2,14 @@ package org.swadeshi.entities;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class AbstractEntity {
 
+	private Long pkey;
 	private Boolean deleted = false;
 	private String creator;
 	private Date created;
@@ -11,6 +17,15 @@ public class AbstractEntity {
 	private Date changed; 
 	private Long version;
 
+	
+	@Id
+	@GeneratedValue
+	public Long getPkey() {
+		return pkey;
+	}
+	public void setPkey(Long pkey) {
+		this.pkey = pkey;
+	}
 
 	public Boolean getDeleted() {
 		return deleted;
@@ -57,4 +72,6 @@ public class AbstractEntity {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
+	
+	
 }

@@ -2,10 +2,12 @@ package org.swadeshi.entities;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Account")
-public class Account {
+@Entity
+public class Account extends AbstractEntity {
 
 	private Double amount;
 	

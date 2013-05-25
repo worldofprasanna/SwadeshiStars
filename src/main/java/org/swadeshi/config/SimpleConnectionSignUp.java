@@ -14,7 +14,7 @@ public class SimpleConnectionSignUp implements ConnectionSignUp {
 	public String execute(Connection<?> connection) {
 		// TODO Auto-generated method stub
 		
-		System.out.println(connection.getDisplayName());
+		//System.out.println(connection.getDisplayName());
 		UserProfile profile = connection.fetchUserProfile();
 		User user = new User();
 		user.setEmailId(profile.getEmail());

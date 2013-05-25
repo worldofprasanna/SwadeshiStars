@@ -1,10 +1,11 @@
 package org.swadeshi.entities;
 
+import javax.persistence.Entity;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document(collection = "User")
+@Entity
 public class User extends AbstractEntity {
 	
 	

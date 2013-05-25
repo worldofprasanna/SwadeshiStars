@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -20,14 +21,19 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.swadeshi.controllers.HomeController;
 import org.swadeshi.converters.UserReader;
 import org.swadeshi.converters.UserWriter;
+import org.swadeshi.dao.AppreciationDao;
+import org.swadeshi.dao.UserDao;
+import org.swadeshi.services.AppreciationService;
 
 import com.mongodb.Mongo;
 
 
 @Configuration
 @ImportResource("classpath:security.xml")
+@ComponentScan(basePackageClasses={HomeController.class, UserDao.class, AppreciationService.class})
 public class ComponentConfig {
 
 	@Bean

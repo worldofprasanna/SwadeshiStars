@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
@@ -33,6 +34,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.swadeshi.converters.UserReader;
+import org.swadeshi.dao.AppreciationDao;
 
 import com.mongodb.Mongo;
 
@@ -41,6 +43,7 @@ import com.mongodb.Mongo;
 @EnableWebMvc
 @EnableMongoRepositories("org.swadeshi.services")
 @PropertySource("classpath:config.properties")
+@EnableJpaRepositories(basePackageClasses={AppreciationDao.class})
 public class DataConfig {
 
     @Autowired private Environment environment;
@@ -74,7 +77,7 @@ public class DataConfig {
 	}
 	
 	@Bean
-	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		
 		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean =  new LocalContainerEntityManagerFactoryBean();
 		localContainerEntityManagerFactoryBean.setDataSource(dataSource());
@@ -98,7 +101,7 @@ public class DataConfig {
     @Bean
     public PlatformTransactionManager transactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean().getObject());
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         Map<String, String> jpaProperties = new HashMap<String, String>();
         jpaProperties.put("transactionTimeout", "43200");
         transactionManager.setJpaPropertyMap(jpaProperties);

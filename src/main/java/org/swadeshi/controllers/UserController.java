@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.swadeshi.dao.UserDao;
 import org.swadeshi.entities.User;
-import org.swadeshi.services.UserService;
 
 @RequestMapping("/user")
 @Controller
 public class UserController {
 
-	@Autowired private UserService userService;
+	@Autowired private UserDao userService;
 	
 	@RequestMapping(value = "/allUsers", method = RequestMethod.GET)
 	public ModelAndView getAllMembers() {
