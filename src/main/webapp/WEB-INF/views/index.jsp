@@ -18,7 +18,7 @@
 	</form>
 	<div class="container marketing">
 	<div class="featurette">
-        <img src="<%= request.getContextPath()%>/themes/images/browser-icon-chrome.png" class="featurette-image pull-right">
+        <img src="<%= request.getContextPath()%>/themes/img/browser-icon-chrome.png" class="featurette-image pull-right">
         <h2 class="featurette-heading">Everything is for a cause. <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>

@@ -32,33 +32,53 @@
 			<div class="span10">
 				<!--Body content-->
 				<!-- Appreciation -->
-				<h2>Appreciations</h2>
-				<hr />
-				<div class="row-fluid actioncomponent" id="appreciationlist">
-				<c:forEach items="${appreciations}" var="appreciation" varStatus="status">				
-				<div class="span4">	
-					<h3><fmt:formatDate pattern="MMM, yyyy" value="${appreciation.created}" /></h3>								
-					<p>
-						<c:out value="${fn:substring(appreciation.appreciationText, 0, 100)}"></c:out>
-					</p>
-					<p>
-						<a class="btn" href="#">more ...</a>
-					</p>
+				<div class="span10 actioncomponent" id="appreciationlist">
+					<h2 class="">Appreciations</h2>
+					<hr />
+					<div class="row-fluid">
+						<c:forEach items="${appreciations}" var="appreciation"
+							varStatus="status">
+							<div class="span4">
+								<h3>
+									<fmt:formatDate pattern="MMM, yyyy"
+										value="${appreciation.created}" />
+								</h3>
+								<p>
+									<c:out
+										value="${fn:substring(appreciation.appreciationText, 0, 100)}"></c:out>
+								</p>
+								<p>
+									<a class="btn" href="#">more ...</a>
+								</p>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-				</c:forEach>
+				<div class="span10 hide actioncomponent" id="memberlist">
+					<h2 class="">Members</h2>
+					<hr />
+					<!-- Members -->
+					<div class="row-fluid">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>S No</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${users}" var="user" varStatus="sno">
+									<tr>
+										<td>${sno.count}</td>
+										<td>${user.firstName}</td>
+										<td>${user.lastName}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				</div>
-				
-				<!-- Members -->
-				<div class="hero-unit hide actioncomponent" id="memberlist">
-					<h3>Members</h3>
-					<c:forEach items="${users}" var="user">
-						<p>
-							<c:out value="${user}"></c:out>
-						</p>
-					</c:forEach>
-				</div>
-				
 			</div>
 		</div>
 	</div>
