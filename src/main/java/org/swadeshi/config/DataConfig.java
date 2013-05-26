@@ -110,13 +110,13 @@ public class DataConfig {
     
     public Map<String, String> jpaPropertyMap() {
         Map<String, String> map = new HashMap<String, String>();
-        map.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
+    //    map.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
         map.put(org.hibernate.cfg.Environment.C3P0_MIN_SIZE, "5");
         map.put(org.hibernate.cfg.Environment.C3P0_MAX_SIZE, "20");
         map.put(org.hibernate.cfg.Environment.C3P0_TIMEOUT, "5");
         map.put(org.hibernate.cfg.Environment.C3P0_MIN_SIZE, "360000");
         map.put(org.hibernate.cfg.Environment.DIALECT,  "org.hibernate.dialect.MySQL5Dialect");
-        map.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
+       // map.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
        // map.put(org.hibernate.cfg.Environment.HBM2DDL_IMPORT_FILES, "Account.sql");
         return map;
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.swadeshi.dao.UserDao;
 import org.swadeshi.entities.User;
+import org.swadeshi.entities.UserConnection;
 
 @RequestMapping("/user")
 @Controller

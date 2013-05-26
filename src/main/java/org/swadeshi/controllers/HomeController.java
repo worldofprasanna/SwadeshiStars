@@ -18,18 +18,21 @@ package org.swadeshi.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.social.google.api.Google;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.swadeshi.entities.Appreciation;
 import org.swadeshi.entities.User;
+import org.swadeshi.entities.UserConnection;
 import org.swadeshi.exceptions.CustomException;
 import org.swadeshi.services.AppreciationService;
 import org.swadeshi.services.UserService;
@@ -37,15 +40,26 @@ import org.swadeshi.services.UserService;
 @Controller
 public class HomeController {
 	
+	private Google google;
+	
 	@Autowired
 	private AppreciationService appreciationService;
 
 	@Autowired
 	private UserService userService;
 	
+	@Inject
+	public HomeController(Google google){
+		this.google = google;
+	}
+	
+	
 	@RequestMapping("/home")
 	public ModelAndView test(Principal currentUser){
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		String userName="Guest";
+		if (google.isAuthorized())
+				userName = google.userOperations().getUserProfile().getName();
 		ModelAndView modelAndView =new ModelAndView("home");
 		
 		try {

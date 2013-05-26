@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.swadeshi.dao.UserDao;
 import org.swadeshi.entities.Account;
 import org.swadeshi.entities.User;
+import org.swadeshi.entities.UserConnection;
+import org.swadeshi.exceptions.CustomException;
 
 @Service
 public class UserService {
@@ -25,7 +27,11 @@ public class UserService {
 		return users;
 	}
 	
-	public User saveAccount(User user){
+	public User saveUser(User user){
 		return userDao.save(user);
+	}
+	
+	public User findUserByUserName(String userName) throws CustomException{
+		return userDao.findUserByUserName(userName);
 	}
 }

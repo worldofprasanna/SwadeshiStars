@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,15 +48,40 @@
 				
 				<!-- Accounts -->
 				<div class="span10 hide actioncomponent" id="accountsform">
-				<legend>Upload Account Details</legend>
-				<form:form name="account" action="createaccount" modelAttribute="Account">		
-					<fieldset>						
-						<label>Appreciation Text</label>	
-						<textarea name="appreciationText" rows="5" class="span12"></textarea>
-						<label>Date</label>
-						<input type="text" placeholder="DD/MON/YYYY" name="createdDate">
-						<span class="help-block"></span>
-						<button type="submit" class="btn">Create</button>
+				<legend>Create Account Details for current month</legend>
+				<form:form name="account" action="createaccount">		
+					<fieldset>
+							<table class="table table-striped">
+								<caption>Members List</caption>
+								<thead>
+									<tr>
+										<th>FirstName</th>
+										<th>LastName</th>
+										<th>Is Contributing ?</th>
+										<th>Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${users}" var="user">
+									<tr>																			
+										<td><input type="hidden" name="userName" value="${user.userName}" />
+											<span class="input uneditable-input">${user.firstName}</span>
+										</td>
+										<td><span class="input uneditable-input">${user.lastName}</span></td>
+										<td>
+											<label class="checkbox">
+												<input type="checkbox" name="isContributing">
+											</label>
+										</td>
+										<td><input type="text" name="amount"></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div class="form-actions">
+    							<button type="submit" class="btn btn-primary">Update</button>
+    							<button type="button" class="btn">Cancel</button>
+    						</div>							
 					</fieldset>
 				</form:form>
 				</div>

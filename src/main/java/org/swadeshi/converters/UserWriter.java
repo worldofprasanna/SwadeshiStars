@@ -2,6 +2,7 @@ package org.swadeshi.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.swadeshi.entities.User;
+import org.swadeshi.entities.UserConnection;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;

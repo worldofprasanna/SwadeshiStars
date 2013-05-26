@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @MappedSuperclass
 public class AbstractEntity {
@@ -71,6 +73,16 @@ public class AbstractEntity {
 	}
 	public void setVersion(Long version) {
 		this.version = version;
+	}
+	
+	@PrePersist
+	public void onPerisit(){
+		this.setCreated(new Date());
+	}
+	
+	@PreUpdate
+	public void onChange(){
+		this.setChanged(new Date());
 	}
 	
 	

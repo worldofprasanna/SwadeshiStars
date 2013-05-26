@@ -12,10 +12,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.swadeshi.entities.Account;
 import org.swadeshi.entities.Appreciation;
 import org.swadeshi.entities.User;
+import org.swadeshi.entities.UserConnection;
 import org.swadeshi.exceptions.CustomException;
 import org.swadeshi.services.AccountService;
 import org.swadeshi.services.AppreciationService;
@@ -68,13 +70,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/createaccount")
-	public ModelAndView saveAccount(@ModelAttribute Account account){
+	public ModelAndView saveAccount(@RequestParam List<String> userName, @RequestParam List<Double> amount){
 		ModelAndView modelAndView = new ModelAndView("admin");
 		try {
-			accountService.saveAccount(account);
-			List<Account>accounts = accountService.fetchAllAccounts();
+			//accountService.saveAccount(account);
+			List<Account>accounts = accountService.contributedAccounts(userName, amount);
+			List<User> users = userService.fetchAllUsers();
+			List<Appreciation>appreciations = appreciationService.fetchAllAppreciations();
+			modelAndView.addObject("appreciations", appreciations);
 			modelAndView.addObject("accounts", accounts);
-			modelAndView.addObject("message", "Account added successfully !");
+			modelAndView.addObject("users", users);
+			
+			modelAndView.addObject("message", "Accounts added successfully !");
 		} catch (CustomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

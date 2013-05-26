@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +12,7 @@
 </head>
 
 <body>
-	<div class="alert alert-success">Welcome ${username}</div>
+	<div class="alert alert-success">Welcome ${username} !</div>
 
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -30,17 +32,21 @@
 			<div class="span10">
 				<!--Body content-->
 				<!-- Appreciation -->
-				
-				<div class="hero-unit actioncomponent" id="appreciationlist">
-					<h3>Appreciations</h3>
-					<c:forEach items="${appreciations}" var="appreciation">
-						<p>
-							<c:out value="${appreciation.appreciationText}"></c:out>
-						</p>
-						<p>
-							<c:out value="${appreciation.created}"></c:out>
-						</p>
-					</c:forEach>
+				<h2>Appreciations</h2>
+				<hr />
+				<div class="row-fluid actioncomponent" id="appreciationlist">
+				<c:forEach items="${appreciations}" var="appreciation" varStatus="status">				
+				<div class="span4">	
+					<h3><fmt:formatDate pattern="MMM, yyyy" value="${appreciation.created}" /></h3>								
+					<p>
+						<c:out value="${fn:substring(appreciation.appreciationText, 0, 100)}"></c:out>
+					</p>
+					<p>
+						<a class="btn" href="#">more ...</a>
+					</p>
+				</div>
+				</c:forEach>
+				</div>
 				</div>
 				
 				<!-- Members -->
