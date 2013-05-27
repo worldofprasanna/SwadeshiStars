@@ -17,6 +17,7 @@ public class User extends AbstractEntity {
 	private String firstName;
 	private String emailId;
 	private String displayName;
+	private String roleName = "ROLE_USER";
 	
 	private List<Account> accounts;
 	
@@ -50,5 +51,10 @@ public class User extends AbstractEntity {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-		
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 }

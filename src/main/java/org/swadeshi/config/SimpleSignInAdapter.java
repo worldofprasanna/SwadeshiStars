@@ -15,22 +15,24 @@
  */
 package org.swadeshi.config;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.WebAttributes;
-import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.swadeshi.entities.User;
+import org.swadeshi.exceptions.CustomException;
+import org.swadeshi.services.UserService;
 
 public class SimpleSignInAdapter implements SignInAdapter {
+	
+	@Autowired private UserService userService;
 
 	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
 		signin(connection.fetchUserProfile().getUsername());
@@ -38,7 +40,20 @@ public class SimpleSignInAdapter implements SignInAdapter {
 	}
 
 	public void signin(String userId) {
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));	
+		User user = null;
+		String roleName = "ROLE_USER";
+		try {
+			user = userService.findUserByUserName(userId);
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (user!=null) {
+			roleName = user.getRoleName();
+		}
+		List<GrantedAuthority> auth= new ArrayList<GrantedAuthority>();
+		auth.add(new GrantedAuthorityImpl(roleName));
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, auth));	
 	}
 
 

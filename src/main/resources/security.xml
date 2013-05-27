@@ -7,7 +7,7 @@
 
 	<http pattern="/resources/**" security="none" />
 
-	<http use-expressions="true">
+	<http use-expressions="true" access-denied-page="/home">
 		<!-- Authentication policy -->
 		<form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
 		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
@@ -17,6 +17,7 @@
 		<intercept-url pattern="/signup/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
 		<intercept-url pattern="/" access="permitAll"  />
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN') " />
 		<intercept-url pattern="/**" access="isAuthenticated()"  />
 	</http>
 

@@ -36,6 +36,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
@@ -104,10 +105,16 @@ public class ExplicitSocialConfig {
 	
 	@Bean
 	public ProviderSignInController providerSignInController() {		 
-		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), new SimpleSignInAdapter());
+		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter());
 		providerSignInController.setApplicationUrl("http://localhost:8090/swadeshistars");
 		
 		return providerSignInController;
+	}
+	
+	@Bean
+	public SignInAdapter  signInAdapter() {
+		SignInAdapter signInAdapter = new SimpleSignInAdapter();
+		return signInAdapter;
 	}
 	
 }
