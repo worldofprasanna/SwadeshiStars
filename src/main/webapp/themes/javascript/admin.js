@@ -14,6 +14,12 @@ $(document).ready(function(){
 		hideComponent();
 		$('#activitiesform').show();
 	});
+	
+	$('#sendmail').on('click', function(){
+		hideComponent();
+		$('#sendmailform').show();
+	});
+		
 });
 
 function hideComponent(){

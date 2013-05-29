@@ -2,7 +2,9 @@ package org.swadeshi.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import org.hibernate.annotations.common.reflection.java.JavaMetadataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +20,8 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
@@ -40,5 +44,20 @@ public class ComponentConfig {
 	public SimpleConnectionSignUp simpleConnectionSignUp(){
 		return new SimpleConnectionSignUp();
 	}
+		
+	@Bean
+	public JavaMailSender mailSender(){
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();		
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		mailSender.setUsername("username- to be given");
+		mailSender.setPassword("password- to be given");
+		Properties javaMailProperties = new Properties();
+		//javaMailProperties.put("mail.smtp.auth", true);
+		javaMailProperties.put("mail.smtp.starttls.enable", true);
+		mailSender.setJavaMailProperties(javaMailProperties);
+		return mailSender;
+	}
+	
 	
 }

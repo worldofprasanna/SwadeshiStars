@@ -23,6 +23,8 @@
 									Accounts</a></li>
 							<li><a href="#activities" id="activities"><i class="icon-chevron-right"></i>
 									Activities</a></li>
+							<li><a href="#sendmail" id="sendmail"><i class="icon-chevron-right"></i>
+									Send Mail</a></li>		
 						</ul>
 					</div>
 				</div>
@@ -101,6 +103,22 @@
 					</fieldset>
 				</form:form>
 				</div>
+				
+				<!-- Send Mail -->
+				<div class="span10 hide actioncomponent" id="sendmailform">
+				<legend>Send Mail to Group</legend>
+				<form:form name="sendmail" action="sendmail">		
+					<fieldset>						
+						<label>Body Content</label>	
+						<textarea name="bodyContent" rows="5" class="span12"></textarea>
+						<label>Subject</label>
+						<input type="text" placeholder="Subject for the Mail" name="subject">
+						<span class="help-block"></span>
+						<button type="submit" class="btn">Send Mail</button>
+					</fieldset>
+				</form:form>
+				</div>
+				
 			</div>
 		</div>
 	</div>

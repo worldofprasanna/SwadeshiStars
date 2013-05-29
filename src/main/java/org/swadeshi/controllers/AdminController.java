@@ -4,9 +4,12 @@ import java.beans.PropertyEditorSupport;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -23,6 +26,7 @@ import org.swadeshi.services.AccountService;
 import org.swadeshi.services.AppreciationService;
 import org.swadeshi.services.UserService;
 
+
 @Controller
 public class AdminController {
 
@@ -34,6 +38,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@RequestMapping("/admin")
 	public ModelAndView home(){
@@ -106,6 +113,27 @@ public class AdminController {
 		        return new SimpleDateFormat("dd/MM/yyyy").format((Date) getValue());
 		    } 
 		});
+	}
+	
+	@RequestMapping ("/sendmail")
+	public ModelAndView sendMail(@RequestParam String bodyContent, @RequestParam String subject){
+		
+		ModelAndView modelAndView = new ModelAndView("admin");
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setSubject(subject);
+		mailMessage.setFrom("prasanna.v@imaginea.com");
+		List<User> users = userService.fetchAllUsers();
+				
+		String[] toValues = (String[]) users.toArray();
+		mailMessage.setTo(toValues);
+		
+		mailMessage.setText(bodyContent);
+		mailSender.send(mailMessage);
+		
+		modelAndView.addObject("message", "Mail Sent successfully !");
+		
+		return modelAndView;
 	}
 	
 }
