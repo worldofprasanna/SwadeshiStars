@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.swadeshi.converters.UserReader;
 import org.swadeshi.dao.AppreciationDao;
+import org.swadeshi.entities.User;
 
 import com.mongodb.Mongo;
 
@@ -47,6 +49,11 @@ import com.mongodb.Mongo;
 public class DataConfig {
 
     @Autowired private Environment environment;
+    
+    @Autowired
+	private DataSourceConfiguration dataSourceConfiguration;
+    
+    private CloudEnvironment cloudEnvironment = new CloudEnvironment();
 
 	@Value("${mongodb.host.name}")
 	private String hostName;
@@ -64,27 +71,18 @@ public class DataConfig {
 		internalResourceViewResolver.setPrefix("/WEB-INF/views/");
 		internalResourceViewResolver.setSuffix(".jsp");
 		return internalResourceViewResolver;
-	}
-	
-	@Bean 
-	public DriverManagerDataSource dataSource() {
-		DriverManagerDataSource driverManagerDataSource = new  DriverManagerDataSource();
-		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/test9");
-		driverManagerDataSource.setUsername("root");
-		driverManagerDataSource.setPassword("root");
-		return driverManagerDataSource;
-	}
+	}		
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		
 		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean =  new LocalContainerEntityManagerFactoryBean();
-		localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+		localContainerEntityManagerFactoryBean.setDataSource(dataSourceConfiguration.getDataSource());
 		localContainerEntityManagerFactoryBean.setJpaDialect(new HibernateJpaDialect());
 		localContainerEntityManagerFactoryBean.setJpaPropertyMap(jpaPropertyMap());
 		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaAdapter());
 		localContainerEntityManagerFactoryBean.setPersistenceUnitName("punit");
+		localContainerEntityManagerFactoryBean.setPackagesToScan(new String[]{User.class.getPackage().getName()});
 		return localContainerEntityManagerFactoryBean;
 	}
 	
@@ -92,7 +90,12 @@ public class DataConfig {
     public JpaVendorAdapter jpaAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         hibernateJpaVendorAdapter.setShowSql(true);
-        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+        
+        if (cloudEnvironment.isCloudFoundry())
+        	hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+		else
+			hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+        
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(true);
         return hibernateJpaVendorAdapter;
@@ -123,7 +126,7 @@ public class DataConfig {
     
     @Bean
 	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
+		return new JdbcTemplate(dataSourceConfiguration.getDataSource());
 	}
     
     

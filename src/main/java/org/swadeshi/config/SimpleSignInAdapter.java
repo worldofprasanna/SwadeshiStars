@@ -48,7 +48,7 @@ public class SimpleSignInAdapter implements SignInAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (user!=null) {
+		if (user != null && user.getRoleName() != null) {
 			roleName = user.getRoleName();
 		}
 		List<GrantedAuthority> auth= new ArrayList<GrantedAuthority>();

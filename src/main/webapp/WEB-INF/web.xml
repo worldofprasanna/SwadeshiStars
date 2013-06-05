@@ -9,6 +9,13 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	 -->
+	 <!-- Application Context Initializer -->
+	 
+	 <context-param>
+       <param-name>contextInitializerClasses</param-name>
+       <param-value>org.swadeshi.config.SpringDataApplicationContextInitializer</param-value>
+     </context-param>
+	 
 		<!-- Java-based Spring container definition -->
 	<context-param>
     	<param-name>contextClass</param-name>
