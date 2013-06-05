@@ -55,7 +55,7 @@ public class HomeController {
 	
 	
 	@RequestMapping("/home")
-	public ModelAndView test(Principal currentUser){
+	public ModelAndView homePage(Principal currentUser, HttpServletRequest request){
 		
 		String userName="Guest";
 		if (google.isAuthorized())
@@ -68,6 +68,9 @@ public class HomeController {
 			
 			modelAndView.addObject("appreciations", appreciations);
 			modelAndView.addObject("users", users);
+			String message = request.getParameter("message");
+			if (message != null)
+				modelAndView.addObject("message", message);
 			
 		} catch (CustomException e) {
 			// TODO Auto-generated catch block

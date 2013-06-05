@@ -8,7 +8,7 @@
 	<http pattern="/resources/**" security="none" />
 	<http pattern="/themes/**" security="none" />
 
-	<http use-expressions="true" access-denied-page="/home">
+	<http use-expressions="true" access-denied-page="/home?message=Access Denied">
 		<!-- Authentication policy -->
 		<form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
 		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
