@@ -37,9 +37,15 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.connect.web.SignInAdapter;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
+import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
 /**
  * Spring Social Configuration.
@@ -69,6 +75,20 @@ public class ExplicitSocialConfig {
 		return google != null ? google.getApi() : new GoogleTemplate();
 	}
 	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public Facebook facebook() {
+		Connection<Facebook> facebook = connectionRepository().findPrimaryConnection(Facebook.class);
+		return facebook != null ? facebook.getApi() : new FacebookTemplate();
+	}
+	
+	@Bean
+	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
+	public Twitter twitter() {
+		Connection<Twitter> twitter = connectionRepository().findPrimaryConnection(Twitter.class);
+		return twitter != null ? twitter.getApi() : new TwitterTemplate();
+	}
+	
 
 	@Inject
 	private Environment environment;
@@ -81,6 +101,10 @@ public class ExplicitSocialConfig {
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
 		registry.addConnectionFactory(new GoogleConnectionFactory(clientId, clientSecret));
+		registry.addConnectionFactory(new TwitterConnectionFactory(environment.getProperty("twitter.consumerKey"),
+				environment.getProperty("twitter.consumerSecret")));
+		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
+				environment.getProperty("facebook.clientSecret")));
 		return registry;
 	}
 
