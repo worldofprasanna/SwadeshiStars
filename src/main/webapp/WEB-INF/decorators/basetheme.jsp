@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     
     <%@ include file="includes.jsp"%>
+    <decorator:head />
 </head>
 <body>
 <div class="navbar-wrapper">
@@ -16,16 +17,16 @@
 
         <div class="navbar navbar-inverse">
           <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
+           
             <a href="<%= request.getContextPath()%>" class="brand">Swadeshi Stars</a>
-            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+           
             <div class="nav-collapse collapse">
-              <ul class="nav">
+              <ul class="nav" id="main-tabs">
                 <li class="active"><a href="home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>    
                 <auth:authorize ifAnyGranted="ROLE_ADMIN">
-                	<li><a href="<%= request.getContextPath()%>/admin">Admin</a></li>
+                	<li><a href="admin">Admin</a></li>
                 </auth:authorize>                        
               </ul>
             </div><!--/.nav-collapse -->
@@ -35,7 +36,6 @@
         <decorator:body />
         
   	</div> <!-- /.container -->
- </div>
-
+ </div>	
 </body>
 </html>

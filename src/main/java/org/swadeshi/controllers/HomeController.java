@@ -25,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionSignUp;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.google.api.Google;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +42,14 @@ import org.swadeshi.services.UserService;
 @Controller
 public class HomeController {
 	
+	@Autowired
 	private Google google;
+	
+	@Autowired
+	private Facebook facebook;
+	
+	@Autowired
+	private Twitter twitter;
 	
 	@Autowired
 	private AppreciationService appreciationService;
@@ -48,18 +57,18 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
-	@Inject
-	public HomeController(Google google){
-		this.google = google;
-	}
-	
-	
 	@RequestMapping("/home")
 	public ModelAndView homePage(Principal currentUser, HttpServletRequest request){
 		
 		String userName="Guest";
 		if (google.isAuthorized())
 				userName = google.userOperations().getUserProfile().getName();
+		if (facebook.isAuthorized())
+			userName = facebook.userOperations().getUserProfile().getName();
+		
+		if (twitter.isAuthorized())
+			userName = twitter.userOperations().getUserProfile().getName();
+		
 		ModelAndView modelAndView =new ModelAndView("home");
 		
 		try {

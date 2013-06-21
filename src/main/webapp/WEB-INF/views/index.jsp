@@ -6,24 +6,25 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Swadesi</title>
-    
+ <script src="<%= request.getContextPath()%>/themes/javascript/index.js" type="text/javascript"></script>   
 </head>
 
 <body>  
 
-	<form action="signin/google" method="post">
-		<input type="hidden" name="scope" value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo#email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/drive" />
-		<input type="hidden" name="redirect_uri" value="/home" />
-		<button class="btn pull-right">Sign In</button>
-	</form>
+	
 	<div class="container marketing">
-	<div class="featurette">
-        <img src="<%= request.getContextPath()%>/themes/img/browser-icon-chrome.png" class="featurette-image pull-right">
-        <h2 class="featurette-heading">Everything is for a cause. <span class="muted">It'll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
+	<div class="featurette">	    
+        <img src="<%= request.getContextPath()%>/themes/img/test_img.jpg" width="50%" height="50%" class="featurette-image pull-right">
+       <!--  <img src="<%= request.getContextPath()%>/themes/img/browser-icon-chrome.png" width="50%" height="50%" class="featurette-image pull-right"> -->
+    	<div class="featurette-heading">Everything is for a cause. <span class="muted">It'll blow your mind.</span></div>
+        <p class="lead">This is the place to help out the needy either by conducting activity for the children or by aiding financial support. Named the Group as Swadeshi Stars.</p>
+        <a href="#signin" role="button" class="btn" data-toggle="modal">Want to Join ?</a>
+      </div>     
      </div>
+      
 
-    
+    <!-- Sign In -->
 </body>
+
 </html>
+

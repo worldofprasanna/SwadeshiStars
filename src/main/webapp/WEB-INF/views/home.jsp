@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SwadeshiStars</title>
-
+<script src="<%= request.getContextPath()%>/themes/javascript/home.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -19,29 +19,26 @@
 	</c:if>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span2">
-				<!--Sidebar content-->
-				<div class="row">
-				<div class="span3 bs-docs-sidebar">
-					<ul class="nav nav-list bs-docs-sidenav affix">
-						<li class="active"><a href="#appreciation"><i
-								class="icon-chevron-right" id="appreciation"></i>Appreciation</a></li>
-						<li><a href="#account" id="account"><i class="icon-chevron-right"></i>Accounts</a></li>
-						<li><a href="#members" id="user"><i class="icon-chevron-right"></i>Members</a></li>
+			<!--Sidebar content-->
+			<div class="span3">
+				<div class="well sidebar-nav">
+					<ul class="nav nav-list" id="main-tabs">
+						<li class="active"><a href="#appreciation" id="appreciation">Appreciation</a></li>
+						<li><a href="#account" id="account">Accounts</a></li>
+						<li><a href="#members" id="user">Members</a></li>
 					</ul>
-				</div>				
-			</div>
-			</div>
-			<div class="span10">
+				</div>
+			</div>		
+		<div class="span9">
 				<!--Body content-->
 				<!-- Appreciation -->
-				<div class="span10 actioncomponent" id="appreciationlist">
+				<div class="span9 actioncomponent" id="appreciationlist">
 					<h2 class="">Appreciations</h2>
 					<hr />
 					<div class="row-fluid">
 						<c:forEach items="${appreciations}" var="appreciation"
 							varStatus="status">
-							<div class="span4">
+							<div class="well ">
 								<h3>
 									<fmt:formatDate pattern="MMM, yyyy"
 										value="${appreciation.created}" />

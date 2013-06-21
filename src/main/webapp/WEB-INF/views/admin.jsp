@@ -8,31 +8,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin Page</title>
+<script src="<%= request.getContextPath()%>/themes/javascript/admin.js" type="text/javascript"></script>
 </head>
 <body>
+	<div class="alert alert-success">Welcome Admin !</div>
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span2">
-				<!--Sidebar content-->
-				<div class="row">
-					<div class="span3 bs-docs-sidebar">
-						<ul class="nav nav-list bs-docs-sidenav affix">
-							<li class="active"><a href="#appreciation" id="appreciations"><i
-									class="icon-chevron-right"></i> Appreciations</a></li>
-							<li><a href="#account" id="accounts"><i class="icon-chevron-right"></i>
-									Accounts</a></li>
-							<li><a href="#activities" id="activities"><i class="icon-chevron-right"></i>
-									Activities</a></li>
-							<li><a href="#sendmail" id="sendmail"><i class="icon-chevron-right"></i>
-									Send Mail</a></li>		
-						</ul>
-					</div>
+			<!--Sidebar content-->
+			<div class="span3">
+				<div class="well sidebar-nav">
+				 
+				<ul class="nav nav-list" id="main-tabs">					
+					<li class="active"><a href="#appreciations" id="appreciations">Appreciations</a></li>
+					<li><a href="#account" id="accounts">Accounts</a></li>
+					<li><a href="#activities" id="activities">Activities</a></li>
+					<li><a href="#sendmail" id="sendmail">Send Mail</a></li>					
+				</ul>
 				</div>
+				
 			</div>
-			<div class="span10">
-			
+			<div class="span9">
+				
 				<!--Body content-->
-				<p class="text-success">${message}</p>
+				<p class="text-success">${message}</p>				
 				<div class="span10 actioncomponent" id="appreciationform">
 				<legend>Create an Appreciation</legend>
 				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
@@ -94,7 +92,7 @@
 				<legend>Create an Activity</legend>
 				<form:form name="appreciation" action="createappreciation" modelAttribute="Appreciation">		
 					<fieldset>						
-						<label>Appreciation Text</label>	
+						<label>Activity Text</label>	
 						<textarea name="appreciationText" rows="5" class="span12"></textarea>
 						<label>Date</label>
 						<input type="text" placeholder="DD/MON/YYYY" name="createdDate">
@@ -119,8 +117,8 @@
 				</form:form>
 				</div>
 				
-			</div>
+			</div>			
 		</div>
-	</div>
+	</div>	
 </body>
 </html>
