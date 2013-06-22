@@ -24,7 +24,8 @@
 			<div class="span3">
 				<div class="well sidebar-nav">
 					<ul class="nav nav-list" id="main-tabs">
-						<li class="active"><a href="appreciation.htm?page.size=2"
+						<li class="active"><a href="activities.htm" id="activities">Activities</a></li>
+						<li><a href="appreciation.htm?page.size=2"
 							id="appreciation">Appreciation</a></li>
 						<li><a href="accounts.htm" id="account">Accounts</a></li>
 						<li><a href="users.htm?page.sort=firstName" id="user">Members</a></li>

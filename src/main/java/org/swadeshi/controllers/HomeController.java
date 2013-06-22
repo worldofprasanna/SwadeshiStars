@@ -90,14 +90,21 @@ public class HomeController {
 		modelAndView.getModel().put("page", users);
 		return modelAndView;
 	}
-
-	@RequestMapping("/signin")
-	public ModelAndView home(Principal currentUser, Model model, HttpServletRequest request) {		
-		ModelAndView modelAndView = new ModelAndView("index");
-		modelAndView.getModel().put("error", "Please Login to view the Page.");
+	
+	//activities
+	
+	@RequestMapping(value={"/activities"})
+	public ModelAndView activityList(Principal currentUser, HttpServletRequest request, Pageable page){
+		ModelAndView modelAndView = new ModelAndView("activities");
+		
+		String userName = this.getUserName();
+		modelAndView.addObject("username", userName);
+		
+		Page<User> users = userService.fetchAllUsers(page);
+		modelAndView.getModel().put("page", users);
 		return modelAndView;
 	}
-	
+
 	private String getUserName(){
 		String userName="Guest";
 		if (google.isAuthorized())

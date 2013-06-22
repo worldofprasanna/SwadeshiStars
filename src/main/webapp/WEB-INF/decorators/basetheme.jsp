@@ -29,7 +29,7 @@
                 	<li><a href="admin">Admin</a></li>
                 </auth:authorize>                                    
                 <auth:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">           
-                	<li class="pull-right"><a href="signout">Log Out</a></li>
+                	<li class="pull-right"><a href="<%= request.getContextPath()%>/signout">Log Out</a></li>
                 </auth:authorize>                                       
               </ul>
             </div><!--/.nav-collapse -->

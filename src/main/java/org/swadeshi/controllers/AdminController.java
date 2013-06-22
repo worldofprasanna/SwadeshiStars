@@ -1,16 +1,20 @@
 package org.swadeshi.controllers;
 
 import java.beans.PropertyEditorSupport;
+import java.security.Principal;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -136,4 +140,10 @@ public class AdminController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/signin")
+	public ModelAndView home(Principal currentUser, Model model, HttpServletRequest request) {		
+		ModelAndView modelAndView = new ModelAndView("index");
+		modelAndView.getModel().put("error", "Please Login to view the Page.");
+		return modelAndView;
+	}
 }
