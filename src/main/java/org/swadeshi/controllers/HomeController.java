@@ -60,7 +60,16 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value={"/appreciation", "/"})
+	
+	@RequestMapping(value={"/activities","/"})
+	public ModelAndView activitiesList(Principal currentUser, HttpServletRequest request, Pageable page){
+		
+		ModelAndView modelAndView = new ModelAndView("activities");
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping(value={"/appreciation"})
 	public ModelAndView appreciationList(Principal currentUser, HttpServletRequest request, Pageable page){
 		
 		String userName = this.getUserName();
