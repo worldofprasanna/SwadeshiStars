@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.swadeshi.dao.AppreciationDao;
 import org.swadeshi.entities.Appreciation;
@@ -25,6 +27,11 @@ public class AppreciationService {
 		while (appreciationIterator.hasNext())
 			appreciation.add(appreciationIterator.next());
 		return appreciation;
+	}
+	
+	public Page<Appreciation> fetchAllAppreciations(Pageable page) throws CustomException{
+		Page<Appreciation> paginationAppreciation = appreciationDao.findAll(page);		
+		return paginationAppreciation;
 	}
 	
 	public Appreciation saveAppreciation(Appreciation appreciation) throws CustomException{

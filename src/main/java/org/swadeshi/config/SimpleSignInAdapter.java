@@ -36,7 +36,7 @@ public class SimpleSignInAdapter implements SignInAdapter {
 
 	public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
 		signin(connection.fetchUserProfile().getUsername());
-		return "/home";
+		return "/home/";
 	}
 
 	public void signin(String userId) {

@@ -3,7 +3,4 @@
 <decorator name="basic-theme" page="basetheme.jsp">
         <pattern>/*</pattern>
 </decorator>
-<decorator name="index-page" page="signintheme.jsp">
-        <pattern>/</pattern>
-</decorator>
 </decorators>

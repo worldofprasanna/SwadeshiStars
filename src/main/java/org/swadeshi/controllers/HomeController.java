@@ -22,6 +22,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionSignUp;
@@ -40,6 +42,7 @@ import org.swadeshi.services.AppreciationService;
 import org.swadeshi.services.UserService;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 	
 	@Autowired
@@ -57,30 +60,15 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/home")
-	public ModelAndView homePage(Principal currentUser, HttpServletRequest request){
+	@RequestMapping(value={"/appreciation", "/"})
+	public ModelAndView appreciationList(Principal currentUser, HttpServletRequest request, Pageable page){
 		
-		String userName="Guest";
-		if (google.isAuthorized())
-				userName = google.userOperations().getUserProfile().getName();
-		if (facebook.isAuthorized())
-			userName = facebook.userOperations().getUserProfile().getName();
-		
-		if (twitter.isAuthorized())
-			userName = twitter.userOperations().getUserProfile().getName();
-		
-		ModelAndView modelAndView =new ModelAndView("home");
+		String userName = this.getUserName();
+		ModelAndView modelAndView =new ModelAndView("appreciation");
 		
 		try {
-			List<Appreciation> appreciations = appreciationService.fetchAllAppreciations();
-			List<User> users = userService.fetchAllUsers();
-			
-			modelAndView.addObject("appreciations", appreciations);
-			modelAndView.addObject("users", users);
-			String message = request.getParameter("message");
-			if (message != null)
-				modelAndView.addObject("message", message);
-			
+			Page<Appreciation> appreciations = appreciationService.fetchAllAppreciations(page);
+			modelAndView.addObject("page", appreciations);
 		} catch (CustomException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,12 +78,36 @@ public class HomeController {
 		return modelAndView;
 		
 	}
+	
+	@RequestMapping(value={"/users"})
+	public ModelAndView usersList(Principal currentUser, HttpServletRequest request, Pageable page){
+		ModelAndView modelAndView = new ModelAndView("users");
+		
+		String userName = this.getUserName();
+		modelAndView.addObject("username", userName);
+		
+		Page<User> users = userService.fetchAllUsers(page);
+		modelAndView.getModel().put("page", users);
+		return modelAndView;
+	}
 
 	@RequestMapping("/signin")
 	public ModelAndView home(Principal currentUser, Model model, HttpServletRequest request) {		
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.getModel().put("error", "Please Login to view the Page.");
 		return modelAndView;
+	}
+	
+	private String getUserName(){
+		String userName="Guest";
+		if (google.isAuthorized())
+				userName = google.userOperations().getUserProfile().getName();
+		if (facebook.isAuthorized())
+			userName = facebook.userOperations().getUserProfile().getName();
+		
+		if (twitter.isAuthorized())
+			userName = twitter.userOperations().getUserProfile().getName();
+		return userName;
 	}
 	
 	
