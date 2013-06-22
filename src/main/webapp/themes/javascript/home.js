@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$('#appreciations').on('click', function(){
+	$('#appreciation').on('click', function(){
 		hideComponent();
 		$('#appreciationlist').show();
 	});

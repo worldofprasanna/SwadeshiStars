@@ -10,8 +10,6 @@ import org.swadeshi.entities.UserConnection;
 import org.swadeshi.services.UserService;
 
 public class SimpleConnectionSignUp implements ConnectionSignUp {
-
-	@Autowired private MongoTemplate mongoTemplate;
 	
 	@Autowired private UserService userService;
 	

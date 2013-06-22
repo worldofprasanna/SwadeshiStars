@@ -92,9 +92,10 @@ public class HomeController {
 	}
 
 	@RequestMapping("/signin")
-	public String home(Principal currentUser, Model model, HttpServletRequest request) {
-		String errorValue = request.getParameter("error");
-		return "index";
+	public ModelAndView home(Principal currentUser, Model model, HttpServletRequest request) {		
+		ModelAndView modelAndView = new ModelAndView("index");
+		modelAndView.getModel().put("error", "Please Login to view the Page.");
+		return modelAndView;
 	}
 	
 	

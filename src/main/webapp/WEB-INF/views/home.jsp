@@ -23,9 +23,9 @@
 			<div class="span3">
 				<div class="well sidebar-nav">
 					<ul class="nav nav-list" id="main-tabs">
-						<li class="active"><a href="#appreciation" id="appreciation">Appreciation</a></li>
-						<li><a href="#account" id="account">Accounts</a></li>
-						<li><a href="#members" id="user">Members</a></li>
+						<li class="active"><a href="javascript:void(0)" id="appreciation">Appreciation</a></li>
+						<li><a href="javascript:void(0)" id="account">Accounts</a></li>
+						<li><a href="javascript:void(0)" id="user">Members</a></li>
 					</ul>
 				</div>
 			</div>		

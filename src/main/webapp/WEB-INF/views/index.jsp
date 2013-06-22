@@ -1,6 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"
+    prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -13,6 +15,9 @@
 
 	
 	<div class="container marketing">
+	<c:if test="${fn:length(error) > 0}">
+		<div class="alert alert-block">${error}</div>
+	</c:if>
 	<div class="featurette">	    
         <img src="<%= request.getContextPath()%>/themes/img/test_img.jpg" width="50%" height="50%" class="featurette-image pull-right">
        <!--  <img src="<%= request.getContextPath()%>/themes/img/browser-icon-chrome.png" width="50%" height="50%" class="featurette-image pull-right"> -->
