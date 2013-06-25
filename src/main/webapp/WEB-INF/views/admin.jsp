@@ -9,6 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin Page</title>
 <script src="<%= request.getContextPath()%>/themes/javascript/admin.js" type="text/javascript"></script>
+<%-- <script src="<%= request.getContextPath()%>/themes/javascript/jquery-1.10.1.min.js" type="text/javascript"></script> --%>
+<script src="<%= request.getContextPath()%>/themes/javascript/bootstrap-datepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#dp").datepicker();
+	$("#dp1").datepicker();
+});
+</script>
 </head>
 <body>
 	<div class="alert alert-success">Welcome Admin !</div>
@@ -38,7 +46,7 @@
 						<label>Appreciation Text</label>	
 						<textarea name="appreciationText" rows="5" class="span12"></textarea>
 						<label>Date</label>
-						<input type="date" placeholder="DD/MON/YYYY" name="createdDate">
+						<input type="text" placeholder="DD/MON/YYYY" name="createdDate" id="dp" >
 						<span class="help-block"></span>
 						<button type="submit" class="btn">Create</button>
 					</fieldset>
@@ -95,7 +103,7 @@
 						<label>Activity Text</label>	
 						<textarea name="appreciationText" rows="5" class="span12"></textarea>
 						<label>Date</label>
-						<input type="text" placeholder="DD/MON/YYYY" name="createdDate">
+						<input type="text" placeholder="DD/MON/YYYY" name="createdDate" id="dp1" >
 						<span class="help-block"></span>
 						<button type="submit" class="btn">Create</button>
 					</fieldset>

@@ -91,10 +91,10 @@ public class DataConfig {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         hibernateJpaVendorAdapter.setShowSql(true);
         
-        if (cloudEnvironment.isCloudFoundry())
+        /*if (cloudEnvironment.isCloudFoundry())
         	hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
 		else
-			hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+*/			hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
         
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(true);

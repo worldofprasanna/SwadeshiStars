@@ -69,6 +69,16 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value={"/accounts"})
+	public ModelAndView accountsList(Principal currentUser, HttpServletRequest request, Pageable page){
+		
+		ModelAndView modelAndView = new ModelAndView("appreciation");
+		return modelAndView;
+		
+	}
+	
+	
+	
 	@RequestMapping(value={"/appreciation"})
 	public ModelAndView appreciationList(Principal currentUser, HttpServletRequest request, Pageable page){
 		

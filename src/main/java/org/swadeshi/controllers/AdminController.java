@@ -126,11 +126,17 @@ public class AdminController {
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setSubject(subject);
-		mailMessage.setFrom("prasanna.v@imaginea.com");
+		mailMessage.setFrom("ssenthilkumar.cs@gmail.com");
 		List<User> users = userService.fetchAllUsers();
-				
-		String[] toValues = (String[]) users.toArray();
-		mailMessage.setTo(toValues);
+		String toMailId = "";
+		for(User user:users) {
+			toMailId +=user.getEmailId();
+			toMailId += ",";
+		}
+		//Add group Mail id
+		toMailId += "prasanna.v@imaginea.com";
+		
+		mailMessage.setTo(toMailId);
 		
 		mailMessage.setText(bodyContent);
 		mailSender.send(mailMessage);

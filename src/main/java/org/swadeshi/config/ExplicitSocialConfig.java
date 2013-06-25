@@ -16,7 +16,9 @@
 package org.swadeshi.config;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
+import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -59,14 +61,22 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 @Configuration
 public class ExplicitSocialConfig {
 
-	@Value("${google.clientId}")
-	private String clientId;
+	@Value("${google.local.clientId}")
+	private String localClientId;
 
-	@Value("${google.clientSecret}")
-	private String clientSecret;
+	@Value("${google.local.clientSecret}")
+	private String localClientSecret;
+	
+	@Value("${google.cloudfoundry.clientId}")
+	private String cloudClientId;
+
+	@Value("${google.cloudfoundry.clientSecret}")
+	private String cloudClientSecret;
 	
 	@Autowired
 	private ConnectionSignUp connectionSignUp;
+	
+	private CloudEnvironment cloudEnvironment = new CloudEnvironment();
 	
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)	
@@ -94,13 +104,17 @@ public class ExplicitSocialConfig {
 	private Environment environment;
 
 	@Inject
-	private DriverManagerDataSource dataSource;
+	private DataSource dataSource;
 
 	@Bean
 	@Scope(value="singleton", proxyMode=ScopedProxyMode.INTERFACES) 
 	public ConnectionFactoryLocator connectionFactoryLocator() {
 		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new GoogleConnectionFactory(clientId, clientSecret));
+		if(cloudEnvironment.isCloudFoundry()) {
+			registry.addConnectionFactory(new GoogleConnectionFactory(cloudClientId, cloudClientSecret));
+		} else {
+			registry.addConnectionFactory(new GoogleConnectionFactory(localClientId, localClientSecret));
+		}
 		registry.addConnectionFactory(new TwitterConnectionFactory(environment.getProperty("twitter.consumerKey"),
 				environment.getProperty("twitter.consumerSecret")));
 		registry.addConnectionFactory(new FacebookConnectionFactory(environment.getProperty("facebook.clientId"),
@@ -130,7 +144,7 @@ public class ExplicitSocialConfig {
 	@Bean
 	public ProviderSignInController providerSignInController() {		 
 		ProviderSignInController providerSignInController =  new ProviderSignInController(connectionFactoryLocator(), usersConnectionRepository(), signInAdapter());
-		providerSignInController.setApplicationUrl("http://localhost:8090/swadeshistars");
+		providerSignInController.setApplicationUrl("http://swadeshistars-test.cloudfoundry.com");
 		
 		return providerSignInController;
 	}
